@@ -1,0 +1,12 @@
+{
+  "name": "EI-Mirror",
+  "version": "0.0.0",
+  "description": "OTH AW EI-Mirror module",
+  "main": "EI-Mirror.js",
+  "author": {
+    "name": "Matthias Stangl"
+  },
+  "dependencies": {
+    "python-shell": "*"
+  }
+}
