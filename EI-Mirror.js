@@ -1,5 +1,16 @@
 "use strict";
 
+/**
+ * Visualisiert die aktuelle Handposition mit einem Kreis.
+ * Wenn der Kreis lange genug über einer Konfigurierten Position ist wird
+ * eine "PAGE_CHANGED"-Benachrichtigung and das MMM-pages Modul gesendet,
+ * damit zu einer neuen Seite gewechselt wird.
+ * Die Position und die Zielseite können alle konfiguriert werden.
+ * Die Handposition wird von einem Pythonmodul ermittelt und über node_helper.js
+ * and diese Datei gesendet.
+ * Das öffnen einer App wird simuliert, indem man auf einen andere Seite wechselt,
+ * welches ein Modul enthält das mehr Informationen anzeigt.
+ */
 Module.register("EI-Mirror", {
 
 	// Default module config.
@@ -34,6 +45,7 @@ Module.register("EI-Mirror", {
 	},
 
 	// https://github.com/MichMich/MagicMirror/blob/master/modules/README.md
+	// p5.js Dateien, damit der Kreis gemalt werden kann.
 	getScripts: function()  {
 		return [
 			"p5.min.js",
@@ -48,7 +60,6 @@ Module.register("EI-Mirror", {
 		// Start p5.js when the DOM is ready
 		switch (notification) {
 		case "ALL_MODULES_STARTED":
-			// TODO(MSt): Get data from MMM-pages and map modules to regions and current page number
 			// Get the MMM-pages module in order to get information from it
 			self.pagesModule = MM.getModules().withClass("MMM-pages")[0];
 			break;
@@ -68,7 +79,7 @@ Module.register("EI-Mirror", {
 				for(let entry of entries) {
 					self.moduleRegions[entry.target.className] = entry.target.getBoundingClientRect();
 				}
-			}
+			};
 
 			// Get each relevant region and use a ResizeObserver to detect any size changes
 			for (let regionClass of regionClasses) {
@@ -134,8 +145,10 @@ Module.register("EI-Mirror", {
 			p5.draw = function() {
 				p5.clear();
 
+				// Use mouse position
 				let xPosition = p5.mouseX;
 				let yPosition = p5.mouseY;
+				// Use position from python script
 				//let xPosition = self.status["x"];
 				//let yPosition = self.status["y"];
 

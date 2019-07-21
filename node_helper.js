@@ -1,6 +1,16 @@
 var NodeHelper = require("node_helper");
 const {PythonShell} = require("python-shell");
 
+/**
+ * Ruft mittels PythonShell GestureRecognition.py auf, welches die aktuelle Handposition tracked.
+ * Die Ergebnisse des Tracking werden mittels JSON ausgetauscht.
+ * JSON Object:
+ * {
+ *   "x":  0, # 0 <= x <= 1920
+ *   "y": 0, # 0 <= y <= 1080
+ *   "visible": True # Is Hand visible?
+ * }
+ */
 module.exports = NodeHelper.create({
 
 	// System is ready to boot
