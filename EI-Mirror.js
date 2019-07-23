@@ -21,7 +21,7 @@ Module.register("EI-Mirror", {
 		x: 0,
 		y: 0,
 		visible: true,
-		timer: false
+		startTimer: false
 	},
 
 	// Contains a DomRect with the size of each possible module region
@@ -216,9 +216,9 @@ Module.register("EI-Mirror", {
 		switch (notification) {
 		case "STATUS": // Got new output from the python module about the current hand position.
 			self.status = payload;
-			if (self.status.timer == true) {
+			if (self.status.startTimer == true) {
 				self.sendNotification("START_TIMER");
-			} else if (self.status.timer == false) {
+			} else if (self.status.startTimer == false) {
 				self.sendNotification("STOP_TIMER");
 			}
 			break;

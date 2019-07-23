@@ -9,7 +9,7 @@ const {PythonShell} = require("python-shell");
  *   "x":  0, # 0 <= x <= 1920
  *   "y": 0, # 0 <= y <= 1080
  *   "visible": True # Is Hand visible?
- *   "timer": False # start teeth brush timer
+ *   "startTimer": False # start teeth brush timer
  * }
  */
 module.exports = NodeHelper.create({
