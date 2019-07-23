@@ -8,7 +8,8 @@ import json
 status = {
     "x":  0, # 0 <= x <= 1920
     "y": 0, # 0 <= y <= 1080
-    "visible": True
+    "visible": True,
+    "timer": True
 }
 
 while True:
