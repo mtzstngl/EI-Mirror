@@ -15,5 +15,7 @@ status = {
 while True:
     status["y"] += 1
     status["x"] += status["y"]
+    if status["y"] >= 10:
+        status["startTimer"] = False
     print(json.dumps(status))
     time.sleep(2)
