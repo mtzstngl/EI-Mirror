@@ -222,6 +222,9 @@ Module.register("EI-Mirror", {
 				self.sendNotification("STOP_TIMER");
 			}
 			break;
+		case "ERROR":
+			self.sendNotification("SHOW_ALERT", {title: "FEHLER!", message: payload, timer: 10000});
+			break;
 		}
 	},
 });

@@ -33,6 +33,7 @@ module.exports = NodeHelper.create({
 		});
 		shell.on("stderr", function (stderr) {
 			console.log("STDERR: " + stderr);
+			self.sendSocketNotification("ERROR", stderr);
 		});
 		shell.on("error", function (error) {
 			console.log("ERROR: " + error);
