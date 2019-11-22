@@ -72,7 +72,8 @@ Module.register("EI-Mirror", {
 			let regionClasses = [
 				"region top left", "region top center", "region top right",
 				"region upper third", "region middle center", "region lower third",
-				"region bottom left", "region bottom center", "region bottom right"
+				"region bottom left", "region bottom center", "region bottom right",
+				"specialmedicine"
 			];
 
 			// Callback when an observed element changed size. Update global size dictionary
