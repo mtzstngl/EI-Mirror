@@ -73,7 +73,7 @@ Module.register("EI-Mirror", {
 				"region top left", "region top center", "region top right",
 				"region upper third", "region middle center", "region lower third",
 				"region bottom left", "region bottom center", "region bottom right",
-				"specialmedicine"
+				"specialmedicine", "yesButton", "noButton"
 			];
 
 			// Callback when an observed element changed size. Update global size dictionary
@@ -178,7 +178,13 @@ Module.register("EI-Mirror", {
 							p5.line(xPosition, yPosition + 15, xPosition + 10, yPosition - 15);
 							if (openApp) {
 								setTimeout(function() {
-									self.sendNotification("PAGE_CHANGED", map.targetPage); // Open App after 250ms
+									let notifyName = "PAGE_CHANGED";
+
+									if (map.customNotification) {
+										notifyName = map.customNotification;
+									}
+
+									self.sendNotification(notifyName, map.targetPage); // Open App after 250ms
 								}, 250);
 								openApp = false;
 							}
