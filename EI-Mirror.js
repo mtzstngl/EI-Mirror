@@ -20,6 +20,7 @@ Module.register("EI-Mirror", {
 	status: {
 		x: 0,
 		y: 0,
+		z: 0,
 		visible: true,
 		startTimer: false
 	},
@@ -153,6 +154,7 @@ Module.register("EI-Mirror", {
 				// Use position from python script
 				//let xPosition = self.status["x"];
 				//let yPosition = self.status["y"];
+				let zPosition = self.status["z"];
 
 				// Send Notification to info module about instructions
 				if (handsPreviouslyVisible && !self.status["visible"]) {
@@ -170,12 +172,15 @@ Module.register("EI-Mirror", {
 						p5.noStroke();
 						p5.fill(255);
 						p5.ellipse(xPosition, yPosition, diameter, diameter);
-						if (diameter >= 55) {
+						if (diameter >= (zPosition + 15)) {
 							// Draw checkmark after the "loading" has completed
 							p5.strokeWeight(4);
 							p5.stroke(0);
-							p5.line(xPosition - 10, yPosition + 5, xPosition, yPosition + 15);
-							p5.line(xPosition, yPosition + 15, xPosition + 10, yPosition - 15);
+							let pos1 = (zPosition + 10) / 10; // originally ~5
+							let pos2 = (zPosition + 10) / 5; // originally ~10
+							let pos3 = (zPosition + 10) / 3; // originally ~15
+							p5.line(xPosition - pos2, yPosition + pos1, xPosition, yPosition + pos3);
+							p5.line(xPosition, yPosition + pos3, xPosition + pos2, yPosition - pos3);
 							if (openApp) {
 								setTimeout(function() {
 									let notifyName = "PAGE_CHANGED";
@@ -200,7 +205,7 @@ Module.register("EI-Mirror", {
 					p5.noFill();
 					p5.strokeWeight(4);
 					p5.stroke(255);
-					p5.arc(xPosition, yPosition, 50, 50, p5.radians(rotation), p5.radians(270 + rotation));
+					p5.arc(xPosition, yPosition, zPosition + 10, zPosition + 10, p5.radians(rotation), p5.radians(270 + rotation));
 
 					// advance the rotation
 					rotation = (rotation + 6) % 360;
