@@ -56,11 +56,22 @@ Module.register("EI-Mirror", {
 		];
 	},
 
+	// update the moduleRegion -> Needed for position changes that don't trigger update
+	updateElement: function(className) {
+		const self = this;
+
+		let element = document.getElementsByClassName(className)[0];
+		if (element)
+			self.moduleRegions[className] = element.getBoundingClientRect();
+	},
+
 	// Is called if this module receives a notification from another module
 	notificationReceived: function(notification, payload, sender) {
 		const self = this;
 		// Start p5.js when the DOM is ready
 		switch (notification) {
+		case "UPDATE_OBS_ELEMENT":
+			self.updateElement(payload);
 		case "ALL_MODULES_STARTED":
 			// Get the MMM-pages module in order to get information from it
 			self.pagesModule = MM.getModules().withClass("MMM-pages")[0];
