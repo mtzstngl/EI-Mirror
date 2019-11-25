@@ -72,6 +72,7 @@ Module.register("EI-Mirror", {
 		switch (notification) {
 		case "UPDATE_OBS_ELEMENT":
 			self.updateElement(payload);
+			break;
 		case "ALL_MODULES_STARTED":
 			// Get the MMM-pages module in order to get information from it
 			self.pagesModule = MM.getModules().withClass("MMM-pages")[0];
