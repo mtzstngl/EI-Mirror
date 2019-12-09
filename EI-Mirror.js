@@ -86,7 +86,7 @@ Module.register("EI-Mirror", {
 				"region top left", "region top center", "region top right",
 				"region upper third", "region middle center", "region lower third",
 				"region bottom left", "region bottom center", "region bottom right",
-				"specialmedicine", "yesButton", "noButton"
+				"specialmedicine", "yesButton", "noButton", "ei_medicineButton"
 			];
 
 			// Callback when an observed element changed size. Update global size dictionary
@@ -97,10 +97,10 @@ Module.register("EI-Mirror", {
 			};
 
 			// Get each relevant region and use a ResizeObserver to detect any size changes
+			var observer = new ResizeObserver(observerCallback);
 			for (let regionClass of regionClasses) {
 				let element = document.getElementsByClassName(regionClass)[0];
 				self.moduleRegions[regionClass] = element.getBoundingClientRect();
-				var observer = new ResizeObserver(observerCallback);
 				observer.observe(element);
 			}
 
