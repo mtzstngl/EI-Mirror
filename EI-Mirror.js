@@ -25,6 +25,8 @@ Module.register("EI-Mirror", {
 		startTimer: false
 	},
 
+	medicine_scanning: false,
+
 	// Contains a DomRect with the size of each possible module region
 	moduleRegions: {},
 
@@ -160,13 +162,18 @@ Module.register("EI-Mirror", {
 			p5.draw = function() {
 				p5.clear();
 
-				// Use mouse position
-				let xPosition = p5.mouseX;
-				let yPosition = p5.mouseY;
-				// Use position from python script
-				//let xPosition = self.status["x"];
-				//let yPosition = self.status["y"];
-				let zPosition = self.status["z"];
+				let xPosition = 0;
+				let yPosition = 0;
+				let zPosition = 0;
+				if (!self.medicine_scanning){
+					// Use mouse position
+					xPosition = p5.mouseX;
+					yPosition = p5.mouseY;
+					// Use position from python script
+					//xPosition = self.status["x"];
+					//yPosition = self.status["y"];
+					zPosition = self.status["z"];
+				}
 
 				// Send Notification to info module about instructions
 				if (handsPreviouslyVisible && !self.status["visible"]) {
@@ -200,7 +207,12 @@ Module.register("EI-Mirror", {
 									if (map.customNotification) {
 										notifyName = map.customNotification;
 									}
-
+									if (notifyName == "MED_START_SCANNING") {
+										self.medicine_scanning = true;
+										setTimeout(function() {
+											self.medicine_scanning = false;
+										}, 7000);
+									}
 									self.sendNotification(notifyName, map.targetPage); // Open App after 250ms
 								}, 250);
 								openApp = false;
